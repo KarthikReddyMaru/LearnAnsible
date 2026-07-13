@@ -1,1 +1,2 @@
-karth_ssh@192.168.0.4
+ubuntu_26-04 ansible_host=192.168.64.3 ansible_user=karth ansible_ssh_private_key_file=~/.ssh/ansible
+
