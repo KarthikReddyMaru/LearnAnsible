@@ -10,3 +10,12 @@
     apt:
       name: apache2 
     when: ansible_facts["distribution"] == "Ubuntu"
+  - name: Update indexes
+    dnf:
+      update_cache: true
+    when: ansible_facts["distribution"] == "CentOS"
+  - name: Install Apache server
+    dnf:
+      name: httpd 
+    when: ansible_facts["distribution"] == "CentOS"
+
