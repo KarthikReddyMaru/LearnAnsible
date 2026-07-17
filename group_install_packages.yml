@@ -1,0 +1,17 @@
+- hosts: webserver
+  
+  tasks:
+    - name: Install apache server
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_facts["distribution"] == "CentOS"
+
+- hosts: database
+
+  tasks:
+    - name: Install mariadb
+      apt:
+        name: mariadb-server
+        state: present
+      when: ansible_facts["distribution"] == "Ubuntu" 

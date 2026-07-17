@@ -1,0 +1,7 @@
+[webserver]
+
+centos-9 ansible_user=kcent ansible_host=192.168.64.6 ansible_ssh_private_key_file=~/.ssh/ansible
+
+[database]
+
+ubuntu-26 ansible_user=karth ansible_host=192.168.64.3 ansible_ssh_private_key_file=~/.ssh/ansible
