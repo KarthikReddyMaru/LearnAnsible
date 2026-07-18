@@ -1,5 +1,4 @@
 - hosts: webserver
-  
   tasks:
     - name: Install apache server
       dnf:
@@ -7,8 +6,11 @@
         state: present
       when: ansible_facts["distribution"] == "CentOS"
     
+# to run using tags, --tags="tag1,tag2"
+
     - name: Copy index.html
       become: true
+      tags: copy,index
       copy:
         src: files/index.html
         dest: /var/www/html
