@@ -6,6 +6,15 @@
         name: httpd
         state: present
       when: ansible_facts["distribution"] == "CentOS"
+    
+    - name: Copy index.html
+      become: true
+      copy:
+        src: files/index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: '0644'
 
 - hosts: database
   become: true
