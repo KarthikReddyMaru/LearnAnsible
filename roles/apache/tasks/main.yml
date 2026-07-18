@@ -1,0 +1,29 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for apache
+
+- debug:
+    msg: Downloading apache {{ version }}
+
+- name: Install apache server
+  dnf:
+    name: httpd
+    state: present
+  when: ansible_facts["distribution"] == "CentOS"
+
+- name: Start apache server
+  service:
+    name: httpd
+    state: started
+    enabled: true
+  when: ansible_facts["distribution"] == "CentOS"
+
+# to run using tags, --tags="tag1,tag2"
+- name: Copy index.html
+  tags: copy,index
+  copy:
+    src: files/index.html
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0644'

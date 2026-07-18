@@ -1,36 +1,10 @@
 - hosts: webserver
-  tasks:
-    - name: Install apache server
-      dnf:
-        name: httpd
-        state: present
-      when: ansible_facts["distribution"] == "CentOS"
-
-    - name: Start apache server
+  roles:
+    - role: apache
       become: true
-      service:
-        name: httpd
-        state: started
-        enabled: true
-      when: ansible_facts["distribution"] == "CentOS"
-    
-# to run using tags, --tags="tag1,tag2"
-
-    - name: Copy index.html
-      become: true
-      tags: copy,index
-      copy:
-        src: files/index.html
-        dest: /var/www/html
-        owner: root
-        group: root
-        mode: '0644'
+      version: latest    
 
 - hosts: database
-  become: true
-  tasks:
-    - name: Install mariadb
-      apt:
-        name: mariadb-server
-        state: present
-      when: ansible_facts["distribution"] == "Ubuntu" 
+  roles:
+    - role: mariadb
+      become: true
