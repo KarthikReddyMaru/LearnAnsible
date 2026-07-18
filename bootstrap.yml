@@ -1,0 +1,21 @@
+- name: Bootstrap the server
+  hosts: ubuntu-26
+  become: true
+  
+  tasks:
+    - name: Create the user
+      user:
+        name: simone
+        state: present
+        home: /home/simone
+        groups:
+          - sudo
+          - karth
+
+    - name: Create file in user home
+      file:
+        path: /home/simone/README.md
+        state: touch
+        mode: '0755'
+        owner: root
+        group: root
